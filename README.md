@@ -11,6 +11,6 @@ npm start
 ```
 #### Para testar a aplicação sem precisar clonar acesse o site abaixo.
 
-https://axelrammon.github.io/format-text/
+https://axelrammon.github.io/notes-react/
 
 #### Obrigado!!
