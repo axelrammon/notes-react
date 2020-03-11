@@ -1,4 +1,4 @@
-## Esta é uma simples aplicação em React para formatar texto. :)
+## Esta é uma simples aplicação em React para criar suas notas. :)
 
 ### Para rodar em sua máquina (Linux):
 
