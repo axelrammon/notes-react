@@ -23,8 +23,22 @@ function App() {
 
   function handleClick(e) {
     e.preventDefault();
+    
+    if (tarefa.titulo !== '') {
+      setTarefas([].concat(tarefas, tarefa));
+    } else {
+      tarefa.titulo = 'Untitled'
+      setTarefas([].concat(tarefas, tarefa));
+    }
+    
+    if (tarefa.conteudo !== '') {
+      setTarefas([].concat(tarefas, tarefa));
+    } else {
+      tarefa.conteudo = 'No content'
+    setTarefas([].concat(tarefas, tarefa));    
+    }
+  
 
-    setTarefas([].concat(tarefas, tarefa));
     setTarefa({titulo: '', conteudo: ''});
   }
   
@@ -35,16 +49,18 @@ function App() {
           <form>
             <div>
               <input 
-                type="text" placeholder="Título" 
+                type="text" placeholder="Título (max: 25)" 
                 value={tarefa.titulo}
                 onChange={handleInputTitulo}
+                maxLength={25}
               /><br/>
             </div>
             <div>
               <input 
-                type="text" placeholder="Conteúdo" 
+                type="text" placeholder="Conteúdo (max: 300)" 
                 value={tarefa.conteudo}
                 onChange={handleInputConteudo}
+                maxLength={300}
               /><br/>
             </div>
             <div>
@@ -57,8 +73,8 @@ function App() {
           <ul>
             {tarefas.map((item, index) => {
               return(
-                <div className="tarefa">
-                  <li key={index}>
+                <div  key={index} className="tarefa">
+                  <li>
                     <h3>{item.titulo}</h3>
                     <p>{item.conteudo}</p>
                   </li>
