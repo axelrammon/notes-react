@@ -57,10 +57,12 @@ function App() {
           <ul>
             {tarefas.map((item, index) => {
               return(
-                <li key={index}>
-                  <h3>{item.titulo}</h3>
-                  <p>{item.conteudo}</p>
-                </li>
+                <div className="tarefas">
+                  <li key={index}>
+                    <h3>{item.titulo}</h3>
+                    <p>{item.conteudo}</p>
+                  </li>
+                </div>
               );
             })}
           </ul>
