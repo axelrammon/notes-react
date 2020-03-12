@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import './style.css'
+import './style.css';
 
 function App() {
 
@@ -57,7 +57,7 @@ function App() {
           <ul>
             {tarefas.map((item, index) => {
               return(
-                <div className="tarefas">
+                <div className="tarefa">
                   <li key={index}>
                     <h3>{item.titulo}</h3>
                     <p>{item.conteudo}</p>
