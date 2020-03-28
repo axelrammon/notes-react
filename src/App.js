@@ -23,7 +23,11 @@ function App() {
 
   function handleClick(e) {
     e.preventDefault();
-    
+  
+    if (tarefa.titulo === '' && tarefa.conteudo === '') {
+      return  
+    }
+
     if (tarefa.titulo !== '') {
       setTarefas([].concat(tarefas, tarefa));
     } else {
