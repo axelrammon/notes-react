@@ -1,71 +1,75 @@
+// app.js
+
+// Importando React e Hook useState
 import React, { useState } from 'react';
 
+// Importando estilos CSS
 import './estilo.css';
 
+// Componente principal App
 function App() {
+  // Separando estado tarefa em inputTarefa e tarefas
+  const [inputTarefa, setInputTarefa] = useState({ titulo: '', conteudo: '' });
+  const [tarefas, setTarefas] = useState([]);
 
-  const [ tarefa, setTarefa ] = useState({ titulo: '', conteudo: '' });
-  const [ tarefas, setTarefas ] = useState([]);
-
+  // Função para lidar com mudanças no input de título
   function handleInputTitulo(e) {
-    setTarefa({
-      titulo: e.target.value,
-      conteudo: tarefa.conteudo
+    setInputTarefa({
+      ...inputTarefa,
+      titulo: e.target.value // Atualizando apenas o título
     });
   }
 
+  // Função para lidar com mudanças no input de conteúdo
   function handleInputConteudo(e) {
-    setTarefa({
-      titulo: tarefa.titulo,
-      conteudo: e.target.value
+    setInputTarefa({
+      ...inputTarefa,
+      conteudo: e.target.value // Atualizando apenas o conteúdo
     });
   }
 
+  // Função para adicionar uma nova tarefa
   function handleClick(e) {
     e.preventDefault();
-  
-    if (tarefa.titulo === '' && tarefa.conteudo === '') {
-      return  
+
+    // Verificando se tanto o título quanto o conteúdo estão vazios
+    if (inputTarefa.titulo.trim() === '' && inputTarefa.conteudo.trim() === '') {
+      return;
     }
 
-    if (tarefa.titulo !== '') {
-      setTarefas([].concat(tarefas, tarefa));
-    } else {
-      tarefa.titulo = 'Untitled'
-      setTarefas([].concat(tarefas, tarefa));
-    }
-    
-    if (tarefa.conteudo !== '') {
-      setTarefas([].concat(tarefas, tarefa));
-    } else {
-      tarefa.conteudo = 'No content'
-    setTarefas([].concat(tarefas, tarefa));    
-    }
-  
+    // Adicionando a nova tarefa apenas se o título não estiver vazio
+    const novaTarefa = {
+      titulo: inputTarefa.titulo.trim() !== '' ? inputTarefa.titulo : 'Untitled', // Definindo 'Untitled' se o título estiver vazio
+      conteudo: inputTarefa.conteudo.trim() !== '' ? inputTarefa.conteudo : 'No content' // Definindo 'No content' se o conteúdo estiver vazio
+    };
 
-    setTarefa({titulo: '', conteudo: ''});
+    setTarefas([...tarefas, novaTarefa]); // Adicionando a nova tarefa
+    setInputTarefa({ titulo: '', conteudo: '' }); // Limpando os inputs após adicionar a tarefa
   }
-  
+
+  // Renderização do componente App
   return (
     <div className="App">
       <div className="container">
         <div className="formInput">
           <form>
             <div>
-              <input 
-                type="text" placeholder="Título (max: 25)" 
-                value={tarefa.titulo}
+              <input
+                type="text"
+                placeholder="Título (max: 25)"
+                value={inputTarefa.titulo}
                 onChange={handleInputTitulo}
                 maxLength={25}
-              /><br/>
+              /><br />
             </div>
             <div>
-              <input 
-                type="text" placeholder="Conteúdo (max: 300)" 
-                value={tarefa.conteudo}
+              <input
+                type="text"
+                placeholder="Conteúdo (max: 300)"
+                value={inputTarefa.conteudo}
                 onChange={handleInputConteudo}
                 maxLength={300}
-              /><br/>
+              /><br />
             </div>
             <div>
               <button onClick={handleClick}>Add note</button>
@@ -75,16 +79,15 @@ function App() {
 
         <div className="result">
           <ul>
-            {tarefas.map((item, index) => {
-              return(
-                <div  key={index} className="tarefa">
-                  <li>
-                    <h3>{item.titulo}</h3>
-                    <p>{item.conteudo}</p>
-                  </li>
-                </div>
-              );
-            })}
+            {/* Mapeando e renderizando as tarefas */}
+            {tarefas.map((item, index) => (
+              <div key={index} className="tarefa">
+                <li>
+                  <h3>{item.titulo}</h3>
+                  <p>{item.conteudo}</p>
+                </li>
+              </div>
+            ))}
           </ul>
         </div>
       </div>
